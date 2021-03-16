@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import About from './views/About';
 import Contact from './views/Contact';
 import Home from './views/Home';
+import Shop from './views/Shop';
 
 export default class App extends Component {
   constructor(){
@@ -42,6 +43,7 @@ export default class App extends Component {
             <Route exact path="/" render={() => <Home name={this.state.name} racers={this.state.racers} handleSubmit={this.handleSubmit} />} />
             <Route path="/about" render={() => <About name={this.state.name} />} />
             <Route path="/contact" render={() => <Contact name={this.state.name} />} />
+            <Route path="/shop" render={() => <Shop />}/>
           </Switch>
         </main>
       </div>
