@@ -5,6 +5,7 @@ import About from './views/About';
 import Cart from './views/Cart';
 import Contact from './views/Contact';
 import Home from './views/Home';
+import ProductDetail from './views/ProductDetail';
 import Shop from './views/Shop';
 
 export default class App extends Component {
@@ -73,10 +74,11 @@ export default class App extends Component {
         <main className="container">
           <Switch>
             <Route exact path="/" render={() => <Home name={this.state.name} racers={this.state.racers} handleSubmit={this.handleSubmit} />} />
-            <Route path="/about" render={() => <About name={this.state.name} />} />
-            <Route path="/contact" render={() => <Contact name={this.state.name} />} />
-            <Route path="/shop" render={() => <Shop addToCart={this.addToCart} />}/>
-            <Route path="/cart" render={() => <Cart cart={this.state.cart} sumCartProducts={this.sumCartProducts} removeFromCart={this.removeFromCart}/>} />
+            <Route exact path="/about" render={() => <About name={this.state.name} />} />
+            <Route exact path="/contact" render={() => <Contact name={this.state.name} />} />
+            <Route exact path="/shop" render={() => <Shop addToCart={this.addToCart} />}/>
+            <Route exact path="/cart" render={() => <Cart cart={this.state.cart} sumCartProducts={this.sumCartProducts} removeFromCart={this.removeFromCart}/>} />
+            <Route exact path="/shop/:id" render={({ match }) => <ProductDetail match={match} addToCart={this.addToCart}/>}/>
           </Switch>
         </main>
       </div>
