@@ -34,11 +34,13 @@ export default class Navbar extends Component {
                                 <Link className="nav-link" to="/blog">Blog</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/cart">Cart</Link>
+                                <Link className="nav-link" to="/shop">
+                                    Shop 
+                                </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/shop">
-                                    Shop &nbsp;
+                                <Link className="nav-link" to="/cart">
+                                    Cart &nbsp;
                                     <span className="bg-light"><i className="fa fa-shopping-cart"></i> {this.props.cart.length} | ${this.props.sumCartProducts(this.props.cart)} </span>
                                 </Link>
                             </li>
