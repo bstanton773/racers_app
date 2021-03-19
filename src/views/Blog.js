@@ -11,18 +11,25 @@ export default class Blog extends Component {
         }
     }
 
-    componentDidMount(){
-        fetch('http://localhost:5000/blog/posts')
-            .then(res => res.json())
-            .then(data => this.setState({ posts : data }))
-            .catch(error => console.error(error))
+    async componentDidMount(){
+        let token = await this.props.getToken()
+        let res = await fetch('http://localhost:5000/blog/posts', {
+            headers: {
+                'Authorization': 'Bearer ' + token['token']
+            }
+        })
+        let posts = await res.json()
+        this.setState( { posts: posts })
     }
 
     render() {
         return (
+            <React.Fragment>
+
+            <Link to="/createpost"><button className="btn btn-primary">Create a Post</button></Link>
             <ul className="list-group">
                 {this.state.posts.reverse().map(p => (
-                        <li className="list-group-item" key={p.id}> 
+                    <li className="list-group-item" key={p.id}> 
                             <div>
                                 <Link to={`/blog/${p.id}`}>
                                     <strong>{p.title}</strong>
@@ -34,8 +41,9 @@ export default class Blog extends Component {
                             <cite>&mdash; {p.user}</cite>
                         </li>
                     )
-                )}
-            </ul>
+                    )}
+                </ul>
+            </React.Fragment>
         )
     }
 }

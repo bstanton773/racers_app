@@ -10,11 +10,15 @@ export default class PostDetail extends Component {
         }
     }
 
-    componentDidMount(){
-        fetch(`http://localhost:5000/blog/posts/${this.props.match.params.id}`)
-            .then(res => res.json())
-            .then(data => this.setState( { post : data } ))
-            .catch(error => console.error(error))
+    async componentDidMount(){
+        let token = await this.props.getToken()
+        let res = await fetch(`http://localhost:5000/blog/posts/${this.props.match.params.id}`, {
+            headers: {
+                'Authorization': 'Bearer ' + token['token']
+            }
+        })
+        let post = await res.json()
+        this.setState( { post: post })
     }
 
     render() {
